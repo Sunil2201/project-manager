@@ -14,7 +14,7 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary color="#9652ff">
+    <v-navigation-drawer v-model="drawer" app color="#9652ff">
       <v-list dense nav>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-icon>
