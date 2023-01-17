@@ -14,9 +14,19 @@
       </v-btn>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary class="indigo">
-      <p>test</p>
+    <v-navigation-drawer v-model="drawer" absolute temporary color="#9652ff">
+      <v-list dense nav>
+        <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
+          <v-list-item-icon>
+            <v-icon class="white--text">{{link.icon}}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-tile-title class="white--text">{{link.text}}</v-list-tile-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
     </v-navigation-drawer>
+
   </nav>
 </template>
 
@@ -25,6 +35,11 @@ export default {
   data() {
     return {
       drawer: false,
+      links: [
+        {icon: 'dashboard', text: 'Dashboard', route: '/'},
+        {icon: 'folder', text: 'My Projects', route: '/projects'},
+        {icon: 'person', text: 'Team', route: '/team'}
+      ]
     };
   },
 };
