@@ -1,22 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 
-import aboutPage from "../views/aboutPage";
-import homePage from "../views/homePage"
+import ProjectsPage from "../views/ProjectsPage";
+import DashboardPage from "../views/DashboardPage"
+import TeamPage from "../views/TeamPage"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: "/",
-    name: "homePage",
-    component: homePage,
+    name: "DashboardPage",
+    component: DashboardPage,
   },
   {
-    path: "/about",
-    name: "aboutPage",
-    component: aboutPage,
+    path: "/projects",
+    name: "ProjectsPage",
+    component: ProjectsPage,
   },
+  {
+    path: "/team",
+    name: "TeamPage",
+    component: TeamPage,
+  }
 ];
 
 const router = new VueRouter({

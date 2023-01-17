@@ -1,6 +1,6 @@
 <template>
-  <div class="home ml-2">
-    <h1>Homepage</h1>
+  <div class="projects ml-2">
+    <h1>Projects</h1>
   </div>
 </template>
 
