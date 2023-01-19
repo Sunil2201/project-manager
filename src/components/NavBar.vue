@@ -15,6 +15,16 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app color="#9652ff">
+      <v-col align-center>
+        <v-flex class="mt-5">
+          <v-avatar size="100">
+            <img src="/avatar-1.png" alt="">
+          </v-avatar>
+          <p class="white--text subheading mt-1">
+            The Net Ninja
+          </p>
+        </v-flex>
+      </v-col>
       <v-list dense nav>
         <v-list-item v-for="link in links" :key="link.text" router :to="link.route">
           <v-list-item-icon>
