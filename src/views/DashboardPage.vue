@@ -2,24 +2,69 @@
   <div class="dashboard ml-4">
     <h1 class="subheading grey--text">Dashboard</h1>
 
-    <v-container class="my-5">
-      <v-card flat class="pa-3 mb-2" v-for="project in projects" :key="project.title">
+    <v-container class="my-10">
+      <v-row class="mb-3 ml-1">
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              small
+              text
+              color="grey"
+              @click="sortBy('title')"
+            >
+              <v-icon left small>folder</v-icon>
+              <span class="caption text-lowercase">By project name</span>
+            </v-btn>
+          </template>
+          <span>Sort projects by project name</span>
+        </v-tooltip>
+
+        <v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              v-on="on"
+              small
+              text
+              color="grey"
+              @click="sortBy('person')"
+            >
+              <v-icon left small>person</v-icon>
+              <span class="caption text-lowercase">By person</span>
+            </v-btn>
+          </template>
+          <span>Sort projects by person</span>
+        </v-tooltip>
+      </v-row>
+
+      <v-card
+        flat
+        class="pa-3 mb-2"
+        v-for="project in projects"
+        :key="project.title"
+      >
         <v-row wrap :class="`pa-3 project ${project.status}`">
           <v-flex xs12 md6>
             <div class="caption grey--text">Project title</div>
-            <div>{{project.title}}</div>
+            <div>{{ project.title }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">Person</div>
-            <div>{{project.person}}</div>
+            <div>{{ project.person }}</div>
           </v-flex>
           <v-flex xs6 sm4 md2>
             <div class="caption grey--text">Due by</div>
-            <div>{{project.due}}</div>
+            <div>{{ project.due }}</div>
           </v-flex>
           <v-flex xs3 sm4 md2>
             <div class="float-right">
-              <v-chip small :class="`${project.status} white--text caption my-3`">{{project.status}}</v-chip>
+              <v-chip
+                small
+                :class="`${project.status} white--text caption my-3`"
+                >{{ project.status }}</v-chip
+              >
             </div>
           </v-flex>
         </v-row>
@@ -30,36 +75,69 @@
 
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       projects: [
-        { title: 'Design a new website', person: 'The Net Ninja', due: '1st Jan 2019', status: 'ongoing', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Code up the homepage', person: 'Chun Li', due: '10th Jan 2019', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Design video thumbnails', person: 'Ryu', due: '20th Dec 2018', status: 'complete', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-        { title: 'Create a community forum', person: 'Gouken', due: '20th Oct 2018', status: 'overdue', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!'},
-      ]
-    }
-  }
+        {
+          title: "Design a new website",
+          person: "The Net Ninja",
+          due: "1st Jan 2019",
+          status: "ongoing",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!",
+        },
+        {
+          title: "Code up the homepage",
+          person: "Chun Li",
+          due: "10th Jan 2019",
+          status: "complete",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!",
+        },
+        {
+          title: "Design video thumbnails",
+          person: "Ryu",
+          due: "20th Dec 2018",
+          status: "complete",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!",
+        },
+        {
+          title: "Create a community forum",
+          person: "Gouken",
+          due: "20th Oct 2018",
+          status: "overdue",
+          content:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt consequuntur eos eligendi illum minima adipisci deleniti, dicta mollitia enim explicabo fugiat quidem ducimus praesentium voluptates porro molestias non sequi animi!",
+        },
+      ],
+    };
+  },
+  methods: {
+    sortBy(prop) {
+      this.projects.sort((a, b) => (a[prop] < b[prop] ? -1 : 1));
+    },
+  },
 };
 </script>
 
 <style>
-.project.complete{
+.project.complete {
   border-left: 4px solid #3cd1cd;
 }
-.project.ongoing{
+.project.ongoing {
   border-left: 4px solid orange;
 }
-.project.overdue{
+.project.overdue {
   border-left: 4px solid tomato;
 }
-.v-chip.complete{
+.v-chip.complete {
   background: #3cd1cd !important;
 }
-.v-chip.ongoing{
+.v-chip.ongoing {
   background: #ffaa2c !important;
 }
-.v-chip.overdue{
+.v-chip.overdue {
   background: #f83e70 !important;
 }
 </style>
