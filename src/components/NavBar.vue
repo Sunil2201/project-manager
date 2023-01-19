@@ -42,6 +42,9 @@
           </v-avatar>
           <p class="white--text subheading mt-1">The Net Ninja</p>
         </v-flex>
+        <v-flex class="mt-4 mb-3">
+          <PopupComponent />
+        </v-flex>
       </v-col>
       <v-list dense nav>
         <v-list-item
@@ -65,7 +68,9 @@
 </template>
 
 <script>
+import PopupComponent from "./PopupComponent.vue"
 export default {
+  components: {PopupComponent},
   data() {
     return {
       drawer: false,
