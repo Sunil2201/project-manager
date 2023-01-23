@@ -9,17 +9,19 @@
       </v-card-title>
 
       <v-card-text>
-        <v-form class="px-3">
+        <v-form class="px-3" ref="form">
           <v-text-field
             label="Title"
             v-model="title"
             prepend-icon="folder"
+            :rules="inputRules"
           ></v-text-field>
 
           <v-textarea
             label="Information"
             v-model="content"
             prepend-icon="edit"
+            :rules="inputRules"
           ></v-textarea>
 
           <v-menu
@@ -29,6 +31,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
+                :rules="inputRules"
                 :value="computedDateFormattedDatefns"
                 clearable
                 label="Due date"
@@ -63,13 +66,18 @@ export default {
     return {
       title: "",
       content: "",
-      due: "",
+      due: null,
       menu2: false,
+      inputRules: [
+        v => v.length >= 3 || "Min length is 3 characters"
+      ]
     };
   },
   methods: {
     submit() {
-      console.log(this.title, this.content);
+      if(this.$refs.form.validate()){
+        console.log(this.title, this.content);
+      }
     },
   },
   computed: {
