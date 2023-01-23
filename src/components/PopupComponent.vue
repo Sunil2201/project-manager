@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="600px">
+  <v-dialog max-width="600px" v-model="dialog">
     <template v-slot:activator="{ on, attrs }">
       <v-btn class="success" v-bind="attrs" v-on="on"> Add new project </v-btn>
     </template>
@@ -50,7 +50,7 @@
 
           <v-spacer></v-spacer>
 
-          <v-btn text class="success mx-0 mt-3" @click="submit"
+          <v-btn text class="success mx-0 mt-3" @click="submit" :loading="loading"
             >Add project</v-btn
           >
         </v-form>
@@ -61,8 +61,8 @@
 
 <script>
 import { format, parseISO } from "date-fns";
-import db from '@/fb'
-import { addDoc, collection} from "firebase/firestore";
+import db from "@/fb";
+import { addDoc, collection } from "firebase/firestore";
 
 export default {
   data() {
@@ -71,32 +71,35 @@ export default {
       content: "",
       due: null,
       menu2: false,
-      inputRules: [
-        v => v.length >= 3 || "Min length is 3 characters"
-      ]
+      inputRules: [(v) => v.length >= 3 || "Min length is 3 characters"],
+      loading: false,
+      dialog: false
     };
   },
   methods: {
     submit() {
-      if(this.$refs.form.validate()){
+      if (this.$refs.form.validate()) {
+        this.loading = true;
+
         const project = {
           title: this.title,
           content: this.content,
-          due: format(parseISO(this.due), 'do MMMM yyyy'),
-          person: 'The Net Ninja',
-          status: 'ongoing'
-        }
+          due: format(parseISO(this.due), "do MMMM yyyy"),
+          person: "The Net Ninja",
+          status: "ongoing",
+        };
 
         addDoc(collection(db, "projects"), project).then(() => {
-          console.log('Added to db')
+          this.loading = false;
+          this.dialog = false;
         });
       }
     },
   },
   computed: {
-      computedDateFormattedDatefns () {
-        return this.due ? format(parseISO(this.due), 'do MMMM yyyy') : ''
-      },
+    computedDateFormattedDatefns() {
+      return this.due ? format(parseISO(this.due), "do MMMM yyyy") : "";
+    },
   },
 };
 </script>
