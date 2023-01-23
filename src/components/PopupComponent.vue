@@ -92,6 +92,7 @@ export default {
         addDoc(collection(db, "projects"), project).then(() => {
           this.loading = false;
           this.dialog = false;
+          this.$emit('projectAdded')
         });
       }
     },
