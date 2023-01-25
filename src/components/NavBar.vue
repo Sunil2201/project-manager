@@ -47,7 +47,7 @@
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app color="#9652ff">
-      <v-col align-center>
+      <v-col align="center">
         <v-flex class="mt-5">
           <v-avatar size="100">
             <img src="/avatar-1.png" alt="" />
